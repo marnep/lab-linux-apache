@@ -1,0 +1,24 @@
+name: Validar Vagrantfile
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Instalar Vagrant
+        run: |
+          sudo apt update
+          sudo apt install -y vagrant
+
+      - name: Validar Vagrantfile
+        run: |
+          vagrant validate
